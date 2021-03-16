@@ -1,0 +1,36 @@
+<form #f="ngForm" (ngSubmit)="Submit(f)">
+    <div ngModelGroup="Contact" >
+        <div class="form-group">
+            <label for="firstname"> First Name</label>
+            <input 
+            minlength="3" 
+            maxlength="10" 
+            pattern="banana" 
+            required 
+            ngModel 
+            id="firstName" 
+            name="firstName" 
+            #firstName="ngModel" 
+            (change)="writeLog(firstName)" 
+            type="text" 
+            class="form-control" 
+            id="firstName">
+            <div class="alert alert-danger" *ngIf="firstName.touched && !firstName.valid">
+                <div *ngIf="firstName.errors.required">
+                    First Name is required
+                </div>
+                <div *ngIf="firstName.errors.minlength">
+                    length should be greater than {{firstName.errors.minlength.requiredLength}}.
+                </div>
+                <div *ngIf="firstName.errors.pattern">
+                    pattern donot match with the required pattern.
+                </div>
+            </div>
+        </div>
+    </div>    
+    <div class="form-group">
+        <label for="comment">Comments</label>
+        <textarea ngModel name="comment" class="form-control" id="comment" cols="20" rows="20"></textarea>        
+    </div>
+    <button class="btn btn-primary">Submit</button>
+</form>
